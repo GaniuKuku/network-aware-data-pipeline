@@ -1,2 +1,5 @@
 # Local/reference datasets
 data/reference/
+data/workloads/
+.venv/
+__pycache__/
