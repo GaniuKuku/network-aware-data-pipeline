@@ -1,0 +1,28 @@
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v25.3.1
+    container_name: network-pipeline-redpanda
+    command:
+      - redpanda
+      - start
+      - --mode
+      - dev-container
+      - --kafka-addr
+      - internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr
+      - internal://redpanda:9092,external://localhost:19092
+      - --smp
+      - "1"
+      - --overprovisioned
+      - --memory
+      - 1G
+      - --reserve-memory
+      - 0M
+    ports:
+      - "19092:19092"
+      - "9644:9644"
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+
+volumes:
+  redpanda-data:
